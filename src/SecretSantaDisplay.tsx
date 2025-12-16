@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import random from 'random';
 
+const SEED: number = 10002;
+
 export const SecretSantaDisplay: React.FC = () => {
     const [giverName, setGiverName] = useState<string>('');
     const [confirmedName, setConfirmedName] = useState<string | null>(null);
@@ -74,7 +76,7 @@ export const SecretSantaDisplay: React.FC = () => {
                             value={giverName}
                             onChange={(e) => setGiverName(e.target.value)}
                             list="secret-santa-names"
-                            autoComplete="name"
+                            autoComplete="off"
                             placeholder="Start typing…"
                         />
                         <datalist id="secret-santa-names">
@@ -94,6 +96,21 @@ export const SecretSantaDisplay: React.FC = () => {
                 </form>
 
                 <p style={{ marginTop: 16 }}>Remember the budget is $25. Happy Gifting!</p>
+
+                <div
+                    style={{
+                        position: 'fixed',
+                        right: 12,
+                        bottom: 12,
+                        fontSize: 12,
+                        opacity: 0.6,
+                        pointerEvents: 'none',
+                        userSelect: 'none',
+                    }}
+                    aria-hidden="true"
+                >
+                    seed: {SEED}
+                </div>
             </div>
         );
     }
@@ -171,6 +188,8 @@ export const SecretSantaDisplay: React.FC = () => {
             <button type="button" onClick={onChangeName} style={{ marginTop: 12 }}>
                 Start over (for honest reasons only)
             </button>
+
+
         </div>
     );
 };
@@ -196,8 +215,9 @@ const names: string[] = [
     "Tim",
 ];
 
+
 function getReciever(giver: string): string {
-    let seed: number = 12345;
+    let seed: number = SEED;
 
     random.use(seed);
     let shuffledNames = random.shuffle(names);
