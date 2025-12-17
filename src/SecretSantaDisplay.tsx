@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import random from 'random';
 
-const SEED: number = 10003;
+const SEED: number = 10004;
 
 export const SecretSantaDisplay: React.FC = () => {
     const [giverName, setGiverName] = useState<string>('');
@@ -21,14 +21,14 @@ export const SecretSantaDisplay: React.FC = () => {
 
     const validateAndMatch = (candidate: string) => {
         const trimmed = candidate.trim();
-        if (!trimmed) return { ok: false as const, message: 'Please enter your name.' };
+        if (!trimmed) return { ok: false as const, message: 'Please select your name.' };
 
         const normCandidate = normalizeName(trimmed);
         const match = normalizedOptions.find((o) => o.norm === normCandidate)?.raw;
         if (!match) {
             return {
                 ok: false as const,
-                message: 'Name not found. Please check spelling or pick from the list.',
+                message: 'Name not found. Please pick from the list.',
             };
         }
 
@@ -72,18 +72,20 @@ export const SecretSantaDisplay: React.FC = () => {
                 <form onSubmit={onNameSubmit} style={{ display: 'grid', gap: 12, maxWidth: 520 }}>
                     <label style={{ display: 'grid', gap: 6 }}>
                         <span>Your name</span>
-                        <input
+                        <select
                             value={giverName}
                             onChange={(e) => setGiverName(e.target.value)}
-                            list="secret-santa-names"
                             autoComplete="off"
-                            placeholder="Start typing…"
-                        />
-                        <datalist id="secret-santa-names">
+                        >
+                            <option value="" disabled>
+                                Select your name…
+                            </option>
                             {names.map((n) => (
-                                <option key={n} value={n} />
+                                <option key={n} value={n}>
+                                    {n}
+                                </option>
                             ))}
-                        </datalist>
+                        </select>
                     </label>
 
                     {error ? (
@@ -92,7 +94,9 @@ export const SecretSantaDisplay: React.FC = () => {
                         </p>
                     ) : null}
 
-                    <button type="submit">Continue</button>
+                    <button type="submit" disabled={!giverName}>
+                        Continue
+                    </button>
                 </form>
 
                 <p style={{ marginTop: 16 }}>Remember the budget is $25. Happy Gifting!</p>

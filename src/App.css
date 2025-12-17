@@ -5,6 +5,44 @@
   text-align: center;
 }
 
+/* Phone-friendly layout helpers for SecretSantaDisplay */
+.container {
+  width: min(520px, 100%);
+  margin: 0 auto;
+  padding: 16px;
+  text-align: left; /* forms are easier to scan on mobile */
+}
+
+.container input,
+.container button {
+  width: 100%;
+}
+
+.container input,
+.container button {
+  min-height: 44px; /* comfy tap targets */
+}
+
+/* Prevent long names from overflowing */
+.receiver-name-box,
+.receiver-name {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Make the overall app behave well on phone widths */
+@media (max-width: 480px) {
+  #root {
+    max-width: 100%;
+    padding: 1rem;
+    text-align: left;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
