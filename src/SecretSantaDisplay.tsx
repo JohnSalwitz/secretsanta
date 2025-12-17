@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import random from 'random';
 
-const SEED: number = 10004;
+const SEED: number = 10005;
 
 export const SecretSantaDisplay: React.FC = () => {
     const [giverName, setGiverName] = useState<string>('');
@@ -188,11 +188,6 @@ export const SecretSantaDisplay: React.FC = () => {
             </div>
 
             <p>Remember the budget is $25. Happy Gifting!</p>
-
-            <button type="button" onClick={onChangeName} style={{ marginTop: 12 }}>
-                Start over (for honest reasons only)
-            </button>
-
 
         </div>
     );
