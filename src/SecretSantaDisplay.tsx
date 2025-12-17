@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import random from 'random';
 
-const SEED: number = 10002;
+const SEED: number = 10003;
 
 export const SecretSantaDisplay: React.FC = () => {
     const [giverName, setGiverName] = useState<string>('');
